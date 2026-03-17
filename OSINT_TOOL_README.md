@@ -1,8 +1,8 @@
-# Advanced OSINT Tool with Groq AI Integration
+# OmniSight AI - OSINT Tool Documentation
 
 ## Overview
 
-A comprehensive terminal-based OSINT (Open Source Intelligence) tool that gathers information about domains, IP addresses, and websites. Features Groq API integration for AI-powered security analysis.
+**OmniSight AI** is a comprehensive terminal-based OSINT (Open Source Intelligence) tool with Groq API integration for AI-powered security analysis. Gather intelligence about domains, IP addresses, and websites with advanced AI insights.
 
 ## Features
 
@@ -159,15 +159,6 @@ The tool uses Groq's Llama 3 8B model for AI-powered security analysis. To use t
    - Vulnerability assessment
    - Information gathering suggestions
 
-## Security Considerations
-
-⚠️ **WARNING**: This tool is for authorized security research only. 
-
-- Only scan targets you own or have explicit permission to test
-- Respect robots.txt and terms of service
-- Be mindful of rate limiting
-- Check local laws and regulations
-
 ## Modules Details
 
 ### Basic Info Module
@@ -254,8 +245,9 @@ This tool is provided for educational and authorized security research purposes 
 
 ## Author
 
-Security Researcher
+Ali Zafar (alizafarbati)
 Version 2.0
+Email: alizafarbati@gmail.com
 
 ---
 *Remember: Always obtain proper authorization before scanning any target.*

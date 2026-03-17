@@ -13,7 +13,7 @@ import sys
 class OSINTGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("Advanced OSINT Tool")
+        self.root.title("OmniSight AI")
         self.root.geometry("900x700")
         
         # Variables

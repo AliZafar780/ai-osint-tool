@@ -67,8 +67,8 @@ class OSINTTool:
 ║   ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝║
 ║   ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ ║
 ║                                                                      ║
-║   Advanced OSINT Tool with Groq AI Integration                       ║
-║   Version 2.0 | Made for Security Research                           ║
+║   OmniSight AI with Groq AI Integration                       ║
+║   Version 2.0 | Made by Ali Zafar (alizafarbati)                           ║
 ║                                                                      ║
 ╚══════════════════════════════════════════════════════════════════════╝
 {Colors.RESET}
@@ -616,7 +616,7 @@ Provide detailed and actionable recommendations."""
         print(f"{'='*60}{Colors.RESET}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Advanced OSINT Tool with Groq AI Integration")
+    parser = argparse.ArgumentParser(description="OmniSight AI with Groq AI Integration")
     parser.add_argument("target", help="Target domain or IP address")
     parser.add_argument("-o", "--output", help="Output file for results")
     parser.add_argument("--ports", help="Custom ports (comma-separated)")

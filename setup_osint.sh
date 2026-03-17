@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# OSINT Tool Setup Script
+# OmniSight AI Setup Script
 
 echo "==================================="
-echo "OSINT Tool Setup"
+echo "OmniSight AI Setup"
 echo "==================================="
 
 # Create virtual environment
