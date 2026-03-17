@@ -62,7 +62,7 @@
 pip install --break-system-packages requests colorama dnspython
 
 # Make script executable
-chmod +x advanced_osint_tool_v2.py
+chmod +x advanced_osint_tool.py
 ```
 
 ## Usage
@@ -70,26 +70,26 @@ chmod +x advanced_osint_tool_v2.py
 ### Basic Usage
 
 ```bash
-python3 advanced_osint_tool_v2.py example.com
+python3 advanced_osint_tool.py example.com
 ```
 
 ### With Output File
 
 ```bash
-python3 advanced_osint_tool_v2.py example.com -o results.txt
+python3 advanced_osint_tool.py example.com -o results.txt
 ```
 
 ### With Groq API Key
 
 ```bash
-python3 advanced_osint_tool_v2.py example.com --groq-key your_api_key_here
+python3 advanced_osint_tool.py example.com --groq-key your_api_key_here
 ```
 
 ### Set Groq API Key as Environment Variable
 
 ```bash
 export GROQ_API_KEY="your_api_key_here"
-python3 advanced_osint_tool_v2.py example.com
+python3 advanced_osint_tool.py example.com
 ```
 
 ## Command-Line Options
@@ -110,26 +110,26 @@ options:
 ### Scan a Domain
 
 ```bash
-python3 advanced_osint_tool_v2.py google.com -o google_scan.txt
+python3 advanced_osint_tool.py google.com -o google_scan.txt
 ```
 
 ### Scan an IP Address
 
 ```bash
-python3 advanced_osint_tool_v2.py 8.8.8.8 -o dns_scan.txt
+python3 advanced_osint_tool.py 8.8.8.8 -o dns_scan.txt
 ```
 
 ### Custom Port Scan
 
 ```bash
-python3 advanced_osint_tool_v2.py example.com --ports 80,443,8080,8443
+python3 advanced_osint_tool.py example.com --ports 80,443,8080,8443
 ```
 
 ### With AI Analysis
 
 ```bash
 export GROQ_API_KEY="your_groq_api_key"
-python3 advanced_osint_tool_v2.py example.com
+python3 advanced_osint_tool.py example.com
 ```
 
 ## Output
@@ -246,7 +246,7 @@ This tool is provided for educational and authorized security research purposes 
 ## Author
 
 Ali Zafar (alizafarbati)
-Version 2.0
+Version 1.0
 Email: alizafarbati@gmail.com
 
 ---

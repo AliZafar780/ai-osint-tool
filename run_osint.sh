@@ -15,4 +15,4 @@ fi
 TARGET=$1
 shift
 
-python3 /home/aliz/advanced_osint_tool_v2.py "$TARGET" "$@"
+python3 /home/aliz/advanced_osint_tool.py "$TARGET" "$@"

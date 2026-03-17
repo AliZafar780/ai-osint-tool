@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Advanced Terminal-Based OSINT Tool with Groq API Integration v2.0
+Advanced Terminal-Based OSINT Tool with Groq API Integration v1.0
 Author: Security Researcher
 Version: 2.0
 """
@@ -478,7 +478,7 @@ Provide detailed and actionable recommendations."""
             '/.git/config', '/.env', '/composer.json', '/package.json',
             '/wp-admin', '/wp-login.php', '/xmlrpc.php',
             '/admin', '/login', '/signin', '/register',
-            '/api', '/v1', '/v2', '/v3',
+            '/api', '/v1', '/v1', '/v3',
             '/backup', '/old', '/temp', '/tmp',
             '/config', '/settings', '/database',
             '/upload', '/uploads', '/files', '/images',
