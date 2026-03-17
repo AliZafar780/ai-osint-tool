@@ -56,17 +56,17 @@ chmod +x setup_osint.sh
 
 ```bash
 # Basic scan
-python3 advanced_osint_tool_v2.py example.com
+python3 advanced_osint_tool.py example.com
 
 # With output file
-python3 advanced_osint_tool_v2.py example.com -o results.txt
+python3 advanced_osint_tool.py example.com -o results.txt
 
 # With Groq API key (AI analysis)
 export GROQ_API_KEY="your_api_key_here"
-python3 advanced_osint_tool_v2.py example.com
+python3 advanced_osint_tool.py example.com
 
 # Custom ports
-python3 advanced_osint_tool_v2.py example.com --ports 80,443,8080,8443
+python3 advanced_osint_tool.py example.com --ports 80,443,8080,8443
 
 # Using quick run script
 ./run_osint.sh example.com -o results.txt
@@ -92,25 +92,25 @@ options:
 
 ### Scan a Domain
 ```bash
-python3 advanced_osint_tool_v2.py google.com -o google_scan.txt
+python3 advanced_osint_tool.py google.com -o google_scan.txt
 ```
 
 ### Scan an IP Address
 ```bash
-python3 advanced_osint_tool_v2.py 8.8.8.8 -o dns_scan.txt
+python3 advanced_osint_tool.py 8.8.8.8 -o dns_scan.txt
 ```
 
 ### With AI Analysis
 ```bash
 export GROQ_API_KEY="your_groq_api_key"
-python3 advanced_osint_tool_v2.py example.com
+python3 advanced_osint_tool.py example.com
 ```
 
 ## 📁 Project Structure
 
 ```
 omnisight-ai/
-├── advanced_osint_tool_v2.py  # Main OSINT tool
+├── advanced_osint_tool.py  # Main OSINT tool
 ├── osint_config.yaml          # Configuration file
 ├── setup_osint.sh            # Setup script
 ├── run_osint.sh              # Quick run script

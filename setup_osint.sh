@@ -20,7 +20,7 @@ pip install --break-system-packages requests colorama dnspython pyyaml
 
 # Make scripts executable
 echo "[*] Making scripts executable..."
-chmod +x /home/aliz/advanced_osint_tool_v2.py
+chmod +x /home/aliz/advanced_osint_tool.py
 
 # Create output directory
 echo "[*] Creating output directory..."
@@ -33,8 +33,8 @@ echo ""
 echo "To use the tool:"
 echo "  1. Activate virtual environment: source osint_venv/bin/activate"
 echo "  2. Set Groq API key (optional): export GROQ_API_KEY='your_key'"
-echo "  3. Run: python3 /home/aliz/advanced_osint_tool_v2.py <target>"
+echo "  3. Run: python3 /home/aliz/advanced_osint_tool.py <target>"
 echo ""
 echo "Example:"
-echo "  python3 /home/aliz/advanced_osint_tool_v2.py example.com -o results.txt"
+echo "  python3 /home/aliz/advanced_osint_tool.py example.com -o results.txt"
 echo ""
