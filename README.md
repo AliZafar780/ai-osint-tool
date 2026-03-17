@@ -1,15 +1,16 @@
-# AI-Powered OSINT Tool
+# OmniSight AI - OSINT Tool
 
-![OSINT Tool](https://img.shields.io/badge/OSINT-Tool-blue)
+![OmniSight AI](https://img.shields.io/badge/OmniSight-AI-blue)
 ![Python](https://img.shields.io/badge/Python-3.7%2B-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 ![Version](https://img.shields.io/badge/Version-2.0-orange)
+![Groq](https://img.shields.io/badge/Groq-AI-purple)
 
-A comprehensive terminal-based OSINT (Open Source Intelligence) tool with Groq API integration for AI-powered security analysis.
+**OmniSight AI** - Advanced AI-Powered OSINT Tool with Groq API Integration for comprehensive security intelligence gathering.
 
-## Features
+## 🌟 Features
 
-### 🎯 Core Modules
+### 🔍 Core Intelligence Modules
 
 1. **Basic Information Gathering** - IP geolocation, WHOIS data, domain details
 2. **Subdomain Enumeration** - 30+ common subdomains with DNS resolution
@@ -25,74 +26,56 @@ A comprehensive terminal-based OSINT (Open Source Intelligence) tool with Groq A
 
 ### ✨ Key Features
 
-- **Multi-threaded operations** for speed
+- **Multi-threaded operations** for lightning-fast scanning
 - **Color-coded output** for easy reading
 - **Comprehensive reporting** with timestamps
 - **Groq AI integration** for intelligent analysis
 - **Configurable** via YAML file
 - **Optional GUI** interface
 - **Modular design** for easy extension
+- **Real-time AI insights** powered by Groq
 
-## Installation
+## 🚀 Quick Start
 
-### Prerequisites
-
-- Python 3.7 or higher
-- Groq API key (optional, for AI analysis)
-
-### Install Dependencies
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/AliZafar780/ai-osint-tool.git
+cd ai-osint-tool
+
+# Install dependencies
 pip install requests colorama dnspython
-```
 
-Or use the setup script:
-
-```bash
+# Or use setup script
 chmod +x setup_osint.sh
 ./setup_osint.sh
 ```
 
-## Usage
-
-### Basic Scan
+### Basic Usage
 
 ```bash
+# Basic scan
 python3 advanced_osint_tool_v2.py example.com
-```
 
-### With Output File
-
-```bash
+# With output file
 python3 advanced_osint_tool_v2.py example.com -o results.txt
-```
 
-### With Groq API Key (AI Analysis)
-
-```bash
+# With Groq API key (AI analysis)
 export GROQ_API_KEY="your_api_key_here"
 python3 advanced_osint_tool_v2.py example.com
-```
 
-### Custom Ports
-
-```bash
+# Custom ports
 python3 advanced_osint_tool_v2.py example.com --ports 80,443,8080,8443
-```
 
-### Using Quick Run Script
-
-```bash
+# Using quick run script
 ./run_osint.sh example.com -o results.txt
-```
 
-### GUI Interface
-
-```bash
+# GUI Interface
 python3 osint_gui.py
 ```
 
-## Command-Line Options
+## 📊 Command-Line Options
 
 ```
 positional arguments:
@@ -105,45 +88,55 @@ options:
   --groq-key           Groq API key
 ```
 
-## Examples
+## 🎯 Examples
 
 ### Scan a Domain
-
 ```bash
 python3 advanced_osint_tool_v2.py google.com -o google_scan.txt
 ```
 
 ### Scan an IP Address
-
 ```bash
 python3 advanced_osint_tool_v2.py 8.8.8.8 -o dns_scan.txt
 ```
 
 ### With AI Analysis
-
 ```bash
 export GROQ_API_KEY="your_groq_api_key"
 python3 advanced_osint_tool_v2.py example.com
 ```
 
-## Output
+## 📁 Project Structure
 
-The tool generates:
-- **Real-time console output** with color coding
-- **Comprehensive text report** saved to file
-- **Timestamped results** for each module
+```
+omnisight-ai/
+├── advanced_osint_tool_v2.py  # Main OSINT tool
+├── osint_config.yaml          # Configuration file
+├── setup_osint.sh            # Setup script
+├── run_osint.sh              # Quick run script
+├── osint_gui.py              # GUI interface
+├── README.md                 # This file
+├── LICENSE                   # MIT License
+└── .gitignore               # Git ignore file
+```
+
+## 🎨 Output Features
 
 ### Color Coding
-
 - **Blue**: Informational messages
 - **Green**: Success messages
 - **Yellow**: Warning messages
 - **Red**: Error messages
 - **Cyan**: Data output
 
-## Groq API Integration
+### Report Generation
+- Real-time console output with colors
+- Comprehensive text report saved to file
+- Timestamped results for each module
 
-The tool uses Groq's Llama 3 8B model for AI-powered security analysis. To use this feature:
+## 🔮 Groq AI Integration
+
+**OmniSight AI** uses Groq's Llama 3 8B model for AI-powered security analysis:
 
 1. Get a Groq API key from [Groq Console](https://console.groq.com/keys)
 2. Set it as environment variable or pass via command line
@@ -153,7 +146,7 @@ The tool uses Groq's Llama 3 8B model for AI-powered security analysis. To use t
    - Vulnerability assessment
    - Information gathering suggestions
 
-## Configuration
+## ⚙️ Configuration
 
 Edit `osint_config.yaml` to customize:
 - API keys
@@ -162,30 +155,16 @@ Edit `osint_config.yaml` to customize:
 - URL paths
 - Vulnerability checks
 
-## Security Considerations
+## ⚠️ Security Considerations
 
-⚠️ **WARNING**: This tool is for authorized security research only.
+**WARNING**: This tool is for authorized security research only.
 
 - Only scan targets you own or have explicit permission to test
 - Respect robots.txt and terms of service
 - Be mindful of rate limiting
 - Check local laws and regulations
 
-## Project Structure
-
-```
-osint-tool-ai/
-├── advanced_osint_tool_v2.py  # Main OSINT tool
-├── osint_config.yaml          # Configuration file
-├── setup_osint.sh            # Setup script
-├── run_osint.sh              # Quick run script
-├── osint_gui.py              # GUI interface
-├── OSINT_TOOL_README.md      # Detailed documentation
-├── OSINT_TOOL_SUMMARY.md     # Quick reference
-└── README.md                 # This file
-```
-
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Common Issues
 
@@ -206,7 +185,7 @@ osint-tool-ai/
    - Run with appropriate privileges
    - Check file permissions for output
 
-## Future Enhancements
+## 🚧 Future Enhancements
 
 - [ ] Proxy support
 - [ ] More advanced vulnerability scanning
@@ -216,30 +195,31 @@ osint-tool-ai/
 - [ ] Report generation in multiple formats (HTML, PDF)
 - [ ] More AI models integration
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Author
+## 👤 Author
 
-**Ali Zafar**
-- GitHub: [@alizafar](https://github.com/alizafar)
-- Email: ali.zafar@example.com
+**Ali Zafar (alizafarbati)**
+- GitHub: [@AliZafar780](https://github.com/AliZafar780)
+- Email: alizafarbati@gmail.com
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - Groq for providing the AI API
 - ip-api.com for IP geolocation
 - ipinfo.io for WHOIS data
 - URLScan.io for threat intelligence
 
-## Disclaimer
+## 📢 Disclaimer
 
 This tool is provided for educational and authorized security research purposes only. The author assumes no liability for any misuse or damage caused by this tool. Always obtain proper authorization before scanning any target.
 
 ---
+**OmniSight AI** - See everything, know everything. 
 *Remember: Always obtain proper authorization before scanning any target.*

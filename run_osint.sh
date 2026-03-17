@@ -1,5 +1,5 @@
 #!/bin/bash
-# Quick run script for OSINT tool
+# Quick run script for OmniSight AI
 
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <target> [options]"
