@@ -207,7 +207,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Ali Zafar (alizafarbati)**
 - GitHub: [@AliZafar780](https://github.com/AliZafar780)
-- Email: alizafarbati@gmail.com
+- Email: [GitHub Profile](https://github.com/AliZafar780)
 
 ## 🙏 Acknowledgments
 
