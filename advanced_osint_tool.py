@@ -28,8 +28,13 @@ import ipaddress
 init()
 
 # Groq API Configuration
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
+
+# Validate that GROQ_API_KEY is not a placeholder
+if GROQ_API_KEY and GROQ_API_KEY in ("your_groq_api_key_here", "your_api_key_here", "your_key"):
+    print("[WARNING] GROQ_API_KEY appears to be a placeholder value. AI analysis will be disabled.")
+    GROQ_API_KEY = ""
 
 class Colors:
     RED = Fore.RED
@@ -90,8 +95,13 @@ class OSINTTool:
         print(f"{color}[{timestamp}] [{level}] {message}{Colors.RESET}")
 
     def save_result(self, category, data):
-        if self.output_file:
-            with open(self.output_file, 'a') as f:
+        if not self.output_file:
+            return
+        try:
+            output_dir = os.path.dirname(self.output_file)
+            if output_dir and not os.path.exists(output_dir):
+                os.makedirs(output_dir, exist_ok=True)
+            with open(self.output_file, 'a', encoding='utf-8') as f:
                 f.write(f"\n[{category}]\n")
                 if isinstance(data, dict):
                     for k, v in data.items():
@@ -105,6 +115,8 @@ class OSINTTool:
                             f.write(f"{item}\n")
                 else:
                     f.write(f"{data}\n")
+        except OSError as e:
+            self.log(f"Failed to write output file: {e}", "ERROR")
 
     # ==================== BASIC INFO MODULE ====================
     def get_basic_info(self):
@@ -142,7 +154,8 @@ class OSINTTool:
                 # Get IP address
                 try:
                     ip = socket.gethostbyname(domain)
-                except:
+                except (socket.gaierror, OSError) as e:
+                    self.log(f"Could not resolve IP for {domain}: {e}", "WARNING")
                     ip = "N/A"
                 
                 # Get WHOIS info
@@ -175,8 +188,8 @@ class OSINTTool:
                     'Country': data.get('country', 'N/A'),
                     'Location': data.get('loc', 'N/A')
                 }
-        except:
-            pass
+        except (requests.RequestException, json.JSONDecodeError) as e:
+            self.log(f"WHOIS lookup failed: {e}", "WARNING")
         return {'ASN': 'N/A', 'Country': 'N/A'}
 
     # ==================== SUBDOMAIN MODULE ====================
@@ -201,8 +214,8 @@ class OSINTTool:
                 socket.gethostbyname(subdomain)
                 subdomains.append(subdomain)
                 self.log(f"Found subdomain: {subdomain}", "SUCCESS")
-            except:
-                pass
+            except (socket.gaierror, OSError):
+                pass  # Subdomain does not resolve, skip silently
         
         self.results['subdomains'] = subdomains
         self.save_result("Subdomains", subdomains)
@@ -227,8 +240,8 @@ class OSINTTool:
                 if result == 0:
                     open_ports.append(port)
                     self.log(f"Port {port} is OPEN", "SUCCESS")
-            except:
-                pass
+            except (socket.gaierror, OSError) as e:
+                self.log(f"Port scan error on {port}: {e}", "WARNING")
         
         with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
             executor.map(scan_port, ports)
@@ -249,8 +262,8 @@ class OSINTTool:
             if response.status_code == 200:
                 emails = re.findall(email_pattern, response.text)
                 emails = list(set(emails))
-        except:
-            pass
+        except requests.RequestException as e:
+            self.log(f"Email recon failed to fetch {self.target}: {e}", "WARNING")
         
         self.results['emails'] = emails
         self.save_result("Emails", emails)
@@ -399,7 +412,8 @@ Provide detailed and actionable recommendations."""
             if response.status_code == 200:
                 data = response.json()
                 intel['urlscan_result'] = data.get('api', 'Scan submitted')
-        except:
+        except (requests.RequestException, json.JSONDecodeError) as e:
+            self.log(f"Threat intelligence lookup failed: {e}", "WARNING")
             intel['urlscan_result'] = 'N/A'
         
         self.results['threat_intel'] = intel
@@ -413,15 +427,15 @@ Provide detailed and actionable recommendations."""
         self.log("Performing WHOIS lookup...", "INFO")
         
         try:
-            response = self.session.get(f"https://whoisjson.com/api/v1/whois/{self.target}")
+            response = self.session.get(f"https://whoisjson.com/api/v1/whois/{self.target}", timeout=10)
             if response.status_code == 200:
                 data = response.json()
                 self.results['whois'] = data
                 self.save_result("WHOIS", data)
                 self.log("WHOIS lookup completed", "SUCCESS")
                 return data
-        except:
-            pass
+        except (requests.RequestException, json.JSONDecodeError) as e:
+            self.log(f"WHOIS query failed: {e}", "WARNING")
         
         self.log("WHOIS lookup failed", "WARNING")
         return {}
@@ -444,14 +458,14 @@ Provide detailed and actionable recommendations."""
             try:
                 answers = dns.resolver.resolve(self.target, 'NS')
                 dns_records['NS'] = [str(r) for r in answers]
-            except:
+            except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN, dns.resolver.Timeout):
                 pass
             
             # MX Records
             try:
                 answers = dns.resolver.resolve(self.target, 'MX')
                 dns_records['MX'] = [str(r.exchange) for r in answers]
-            except:
+            except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN, dns.resolver.Timeout):
                 pass
             
         except Exception as e:
@@ -496,8 +510,8 @@ Provide detailed and actionable recommendations."""
                 if response.status_code in [200, 301, 302, 403, 401]:
                     urls.append({'url': url, 'status': response.status_code})
                     self.log(f"Found: {url} (Status: {response.status_code})", "INFO")
-            except:
-                pass
+            except requests.RequestException:
+                pass  # Path not accessible, skip silently
         
         self.results['urls'] = urls
         self.save_result("URLs", urls)
@@ -527,8 +541,8 @@ Provide detailed and actionable recommendations."""
                 if response.status_code == 200:
                     vulnerabilities.append({'url': url, 'issue': description})
                     self.log(f"Vulnerability found: {description}", "WARNING")
-            except:
-                pass
+            except requests.RequestException:
+                pass  # Path not accessible, skip silently
         
         self.results['vulnerabilities'] = vulnerabilities
         self.save_result("Vulnerabilities", vulnerabilities)
@@ -574,11 +588,15 @@ Provide detailed and actionable recommendations."""
             
             report += "\n"
         
-        report_file = f"osint_report_{self.target.replace('.', '_')}_{int(time.time())}.txt"
-        with open(report_file, 'w') as f:
-            f.write(report)
-        
-        self.log(f"Report saved to: {report_file}", "SUCCESS")
+        # Sanitize target name for use in filename
+        safe_target = re.sub(r'[^\w\-]', '_', self.target)
+        report_file = f"osint_report_{safe_target}_{int(time.time())}.txt"
+        try:
+            with open(report_file, 'w', encoding='utf-8') as f:
+                f.write(report)
+            self.log(f"Report saved to: {report_file}", "SUCCESS")
+        except OSError as e:
+            self.log(f"Failed to save report: {e}", "ERROR")
         return report
 
     # ==================== MAIN EXECUTION ====================

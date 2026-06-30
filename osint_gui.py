@@ -89,8 +89,13 @@ class OSINTGUI:
         output_file = self.output_var.get().strip()
         groq_key = self.groq_key_var.get().strip()
         
-        # Build command
-        cmd = [sys.executable, "/home/aliz/advanced_osint_tool_v2.py", target]
+        # Build command - use script's own directory for the main tool path
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        tool_path = os.path.join(script_dir, "advanced_osint_tool.py")
+        if not os.path.exists(tool_path):
+            self.root.after(0, self.append_output, f"Error: Cannot find {tool_path}\n")
+            return
+        cmd = [sys.executable, tool_path, target]
         
         if output_file:
             cmd.extend(["-o", output_file])

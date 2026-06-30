@@ -1,43 +1,41 @@
-# OmniSight AI - OSINT Tool
+# OmniSight AI — OSINT Tool
 
-![OmniSight AI](https://img.shields.io/badge/OmniSight-AI-blue)
-![Python](https://img.shields.io/badge/Python-3.7%2B-green)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-![Version](https://img.shields.io/badge/Version-2.0-orange)
-![Groq](https://img.shields.io/badge/Groq-AI-purple)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-2.0.1-orange)](https://github.com/AliZafar780/ai-osint-tool)
+[![CodeQL](https://img.shields.io/badge/CodeQL-Passing-brightgreen)](https://github.com/AliZafar780/ai-osint-tool)
 
-**OmniSight AI** - Advanced AI-Powered OSINT Tool with Groq API Integration for comprehensive security intelligence gathering.
+**OmniSight AI** is an advanced, modular Open-Source Intelligence (OSINT) tool with optional Groq-powered AI analysis. It performs comprehensive reconnaissance against domains and IP addresses through multiple intelligence-gathering modules.
 
-## 🌟 Features
+---
 
-### 🔍 Core Intelligence Modules
+## Features
 
-1. **Basic Information Gathering** - IP geolocation, WHOIS data, domain details
-2. **Subdomain Enumeration** - 30+ common subdomains with DNS resolution
-3. **Port Scanning** - Multi-threaded scanning of 20+ common ports
-4. **Email Reconnaissance** - Pattern matching for email addresses
-5. **Social Media Detection** - Search URLs for major platforms
-6. **Technology Stack Detection** - Web server, framework, CMS identification
-7. **DNS Analysis** - A, NS, MX records resolution
-8. **URL Enumeration** - 30+ common paths with status codes
-9. **Vulnerability Scanning** - Common misconfiguration checks
-10. **Threat Intelligence** - URLScan.io integration
-11. **Groq AI Analysis** - AI-powered security analysis using Llama 3 8B
+| Module | Description |
+|--------|-------------|
+| **Basic Info** | IP geolocation, ISP/ASN data, domain registration details |
+| **Subdomain Enumeration** | Brute‑force 30+ common subdomains with DNS resolution |
+| **Port Scanning** | Multi‑threaded scan of 20+ common TCP ports |
+| **Email Reconnaissance** | Regex‑based email address harvesting from web content |
+| **Social Media Detection** | Generates search URLs across 6 major platforms |
+| **Technology Stack Detection** | Identifies web servers, frameworks, and CMS platforms |
+| **DNS Analysis** | Resolves A, NS, and MX records via dnspython |
+| **URL Enumeration** | Probes 30+ common paths (robots.txt, .git/config, admin panels) |
+| **Vulnerability Scanning** | Checks for exposed Git repos, .env files, phpinfo, and more |
+| **Threat Intelligence** | Submits URLs to URLScan.io for reputation analysis |
+| **WHOIS Lookup** | Queries domain registration data |
+| **Groq AI Analysis** | AI‑powered security assessment via Llama 3 8B |
 
-### ✨ Key Features
+---
 
-- **Multi-threaded operations** for lightning-fast scanning
-- **Color-coded output** for easy reading
-- **Comprehensive reporting** with timestamps
-- **Groq AI integration** for intelligent analysis
-- **Configurable** via YAML file
-- **Optional GUI** interface
-- **Modular design** for easy extension
-- **Real-time AI insights** powered by Groq
+## Installation
 
-## 🚀 Quick Start
+### Prerequisites
 
-### Installation
+- Python 3.8 or higher
+- pip (Python package manager)
+
+### Quick Setup
 
 ```bash
 # Clone the repository
@@ -45,181 +43,172 @@ git clone https://github.com/AliZafar780/ai-osint-tool.git
 cd ai-osint-tool
 
 # Install dependencies
-pip install requests colorama dnspython
+pip install -r requirements.txt
 
-# Or use setup script
+# (Optional) Run the setup script
 chmod +x setup_osint.sh
 ./setup_osint.sh
 ```
 
-### Basic Usage
+### Dependencies
+
+The following packages are required (see [requirements.txt](requirements.txt) for pinned versions):
+
+- `requests` — HTTP client for API calls
+- `colorama` — Cross‑platform colored terminal output
+- `dnspython` — DNS record resolution
+- `pyyaml` — YAML configuration parsing
+
+---
+
+## Usage
+
+### Command Line
 
 ```bash
-# Basic scan
+python3 advanced_osint_tool.py <target> [options]
+```
+
+**Positional arguments:**
+
+| Argument | Description |
+|----------|-------------|
+| `target`  | Target domain (e.g., `example.com`) or IP address |
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `-h, --help` | Show help message |
+| `-o, --output FILE` | Save results to a file |
+| `--ports PORTS` | Custom comma‑separated port list |
+| `--groq-key KEY` | Groq API key for AI analysis |
+
+### Examples
+
+```bash
+# Basic reconnaissance
 python3 advanced_osint_tool.py example.com
 
-# With output file
+# Save results to file
 python3 advanced_osint_tool.py example.com -o results.txt
 
-# With Groq API key (AI analysis)
+# Scan specific ports
+python3 advanced_osint_tool.py example.com --ports 80,443,8080,8443
+
+# With Groq AI analysis
 export GROQ_API_KEY="your_api_key_here"
 python3 advanced_osint_tool.py example.com
 
-# Custom ports
-python3 advanced_osint_tool.py example.com --ports 80,443,8080,8443
-
-# Using quick run script
+# Using the run script
 ./run_osint.sh example.com -o results.txt
+```
 
-# GUI Interface
+### GUI Interface
+
+An optional Tkinter GUI is available:
+
+```bash
 python3 osint_gui.py
 ```
 
-## 📊 Command-Line Options
+---
 
-```
-positional arguments:
-  target               Target domain or IP address
+## Groq AI Integration
 
-options:
-  -h, --help           Show help message and exit
-  -o, --output         Output file for results
-  --ports              Custom ports (comma-separated)
-  --groq-key           Groq API key
-```
+The Groq module uses the **Llama 3 8B** model to generate a security analysis report for the target, covering:
 
-## 🎯 Examples
+- Potential attack vectors
+- Recommended security measures
+- Common vulnerabilities to investigate
+- Information‑gathering suggestions
 
-### Scan a Domain
-```bash
-python3 advanced_osint_tool.py google.com -o google_scan.txt
-```
+**Setup:**
 
-### Scan an IP Address
-```bash
-python3 advanced_osint_tool.py 8.8.8.8 -o dns_scan.txt
-```
+1. Obtain an API key from the [Groq Console](https://console.groq.com/keys)
+2. Set it via environment variable:
+   ```bash
+   export GROQ_API_KEY="your_key_here"
+   ```
+3. Or pass it directly:
+   ```bash
+   python3 advanced_osint_tool.py example.com --groq-key "your_key_here"
+   ```
 
-### With AI Analysis
-```bash
-export GROQ_API_KEY="your_groq_api_key"
-python3 advanced_osint_tool.py example.com
-```
-
-## 📁 Project Structure
-
-```
-omnisight-ai/
-├── advanced_osint_tool.py  # Main OSINT tool
-├── osint_config.yaml          # Configuration file
-├── setup_osint.sh            # Setup script
-├── run_osint.sh              # Quick run script
-├── osint_gui.py              # GUI interface
-├── README.md                 # This file
-├── LICENSE                   # MIT License
-└── .gitignore               # Git ignore file
-```
-
-## 🎨 Output Features
-
-### Color Coding
-- **Blue**: Informational messages
-- **Green**: Success messages
-- **Yellow**: Warning messages
-- **Red**: Error messages
-- **Cyan**: Data output
-
-### Report Generation
-- Real-time console output with colors
-- Comprehensive text report saved to file
-- Timestamped results for each module
-
-## 🔮 Groq AI Integration
-
-**OmniSight AI** uses Groq's Llama 3 8B model for AI-powered security analysis:
-
-1. Get a Groq API key from [Groq Console](https://console.groq.com/keys)
-2. Set it as environment variable or pass via command line
-3. The AI will analyze the target and provide:
-   - Potential attack vectors
-   - Security recommendations
-   - Vulnerability assessment
-   - Information gathering suggestions
-
-## ⚙️ Configuration
-
-Edit `osint_config.yaml` to customize:
-- API keys
-- Port scan options
-- Subdomain list
-- URL paths
-- Vulnerability checks
-
-## ⚠️ Security Considerations
-
-**WARNING**: This tool is for authorized security research only.
-
-- Only scan targets you own or have explicit permission to test
-- Respect robots.txt and terms of service
-- Be mindful of rate limiting
-- Check local laws and regulations
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **DNS Resolution Errors**
-   - Check network connectivity
-   - Verify DNS server configuration
-
-2. **Connection Timeouts**
-   - Increase timeout values
-   - Check firewall settings
-
-3. **Groq API Errors**
-   - Verify API key validity
-   - Check rate limits
-   - Ensure proper authentication
-
-4. **Permission Errors**
-   - Run with appropriate privileges
-   - Check file permissions for output
-
-## 🚧 Future Enhancements
-
-- [ ] Proxy support
-- [ ] More advanced vulnerability scanning
-- [ ] Integration with additional APIs
-- [ ] Database storage for results
-- [ ] Scheduled scanning
-- [ ] Report generation in multiple formats (HTML, PDF)
-- [ ] More AI models integration
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👤 Author
-
-**Ali Zafar (alizafarbati)**
-- GitHub: [@AliZafar780](https://github.com/AliZafar780)
-- Email: [GitHub Profile](https://github.com/AliZafar780)
-
-## 🙏 Acknowledgments
-
-- Groq for providing the AI API
-- ip-api.com for IP geolocation
-- ipinfo.io for WHOIS data
-- URLScan.io for threat intelligence
-
-## 📢 Disclaimer
-
-This tool is provided for educational and authorized security research purposes only. The author assumes no liability for any misuse or damage caused by this tool. Always obtain proper authorization before scanning any target.
+> **Note:** If the API key is a placeholder value (e.g., `your_groq_api_key_here`), Groq analysis is automatically disabled.
 
 ---
-**OmniSight AI** - See everything, know everything. 
-*Remember: Always obtain proper authorization before scanning any target.*
+
+## Configuration
+
+Edit [`osint_config.yaml`](osint_config.yaml) to customise:
+
+- Port scan target list
+- Subdomain wordlist
+- URL enumeration paths
+- Vulnerability check paths
+- Timeout and threading settings
+
+---
+
+## Project Structure
+
+```
+ai-osint-tool/
+├── advanced_osint_tool.py   # Main OSINT engine (CLI)
+├── osint_gui.py             # Optional Tkinter GUI
+├── osint_config.yaml        # User configuration
+├── requirements.txt         # Python dependencies
+├── setup_osint.sh           # Virtual environment & permissions
+├── run_osint.sh             # Quick‑run wrapper
+├── SECURITY.md              # Security policy
+├── LICENSE                  # MIT license
+├── .gitignore
+└── README.md                # This file
+```
+
+---
+
+## Output
+
+The tool provides:
+
+- **Real‑time coloured console output** — blue for info, green for success, yellow for warnings, red for errors
+- **Structured text report** — saved as `osint_report_<target>_<timestamp>.txt`
+
+---
+
+## Security Considerations
+
+> This tool is intended for **authorised security research only**.
+
+- Only scan targets you own or have explicit permission to test
+- Respect `robots.txt` and website terms of service
+- Be mindful of rate limits — aggressive scanning may trigger blocks
+- Review local laws before use
+
+---
+
+## Troubleshooting
+
+| Issue | Likely Cause | Solution |
+|-------|-------------|----------|
+| `ModuleNotFoundError` | Missing dependency | Run `pip install -r requirements.txt` |
+| DNS resolution fails | Network / DNS config | Check connectivity and DNS servers |
+| Connection timeouts | Firewall / rate limiting | Increase timeout in `osint_config.yaml` |
+| Groq API returns 401 | Invalid API key | Verify key at [Groq Console](https://console.groq.com/keys) |
+| Permission denied | File ownership | Use `chmod +x` on scripts |
+
+---
+
+## License
+
+Distributed under the **MIT License**. See [LICENSE](LICENSE) for details.
+
+## Author
+
+**Ali Zafar** ([@AliZafar780](https://github.com/AliZafar780))
+
+---
+
+*OmniSight AI — See everything, know everything. Use responsibly.*

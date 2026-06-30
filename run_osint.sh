@@ -15,4 +15,6 @@ fi
 TARGET=$1
 shift
 
-python3 /home/aliz/advanced_osint_tool.py "$TARGET" "$@"
+# Determine script directory dynamically
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+python3 "$SCRIPT_DIR/advanced_osint_tool.py" "$TARGET" "$@"
