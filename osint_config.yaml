@@ -1,38 +1,42 @@
-# OSINT Tool Configuration File
+# OmniSight AI v2.0 - Configuration File
+# Override any value via environment variables with UPPERCASE names
 
 api_keys:
-  groq_api_key: "your_groq_api_key_here"
-  urlscan_api_key: "public"  # or your API key
-  
+  groq_api_key: ""              # Set GROQ_API_KEY env var or use --groq-key
+  shodan_api_key: ""            # Set SHODAN_API_KEY env var
+  censys_api_key: ""            # Set CENSYS_API_KEY env var
+  virustotal_api_key: ""        # Set VIRUSTOTAL_API_KEY env var
+  urlscan_api_key: "public"     # or your URLScan.io API key
+
 scan_options:
-  timeout: 5
-  max_threads: 20
+  timeout: 5                    # Request timeout in seconds
+  max_threads: 20               # Maximum concurrent threads
   user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-  
+
 port_scan:
   common_ports:
-    - 21
-    - 22
-    - 23
-    - 25
-    - 53
-    - 80
-    - 110
-    - 111
-    - 135
-    - 139
-    - 143
-    - 443
-    - 445
-    - 993
-    - 995
-    - 1723
-    - 3306
-    - 3389
-    - 5432
-    - 5900
-    - 8080
-    
+    - 21    # FTP
+    - 22    # SSH
+    - 23    # Telnet
+    - 25    # SMTP
+    - 53    # DNS
+    - 80    # HTTP
+    - 110   # POP3
+    - 111   # RPC
+    - 135   # MSRPC
+    - 139   # NetBIOS
+    - 143   # IMAP
+    - 443   # HTTPS
+    - 445   # SMB
+    - 993   # IMAPS
+    - 995   # POP3S
+    - 1723  # PPTP
+    - 3306  # MySQL
+    - 3389  # RDP
+    - 5432  # PostgreSQL
+    - 5900  # VNC
+    - 8080  # HTTP-Proxy
+
 subdomains:
   common_list:
     - www
@@ -51,22 +55,78 @@ subdomains:
     - mobile
     - app
     - apps
-    
+    - cpanel
+    - whm
+    - webmail
+    - ns1
+    - ns2
+    - smtp
+    - pop
+    - pop3
+    - imap
+    - owa
+    - vpn
+    - remote
+    - support
+    - help
+    - forum
+    - community
+    - status
+    - wiki
+    - docs
+    - git
+    - gitlab
+    - bitbucket
+    - jira
+    - confluence
+    - jenkins
+    - monitor
+    - grafana
+    - kibana
+
 urls:
   common_paths:
     - /robots.txt
     - /sitemap.xml
+    - /crossdomain.xml
+    - /clientaccesspolicy.xml
     - /.git/config
     - /.env
     - /composer.json
+    - /package.json
     - /wp-admin
     - /wp-login.php
+    - /xmlrpc.php
     - /admin
     - /login
+    - /signin
+    - /register
     - /api
+    - /v1
+    - /v2
+    - /v3
+    - /backup
+    - /old
+    - /temp
+    - /tmp
+    - /config
+    - /settings
+    - /database
     - /upload
     - /uploads
-    
+    - /files
+    - /images
+    - /css
+    - /js
+    - /fonts
+    - /assets
+    - /phpinfo.php
+    - /test.php
+    - /info.php
+    - /readme.md
+    - /CHANGELOG
+    - /LICENSE
+
 vulnerability_checks:
   - /.git/config
   - /.env
@@ -74,8 +134,24 @@ vulnerability_checks:
   - /server-status
   - /wp-admin
   - /composer.json
-  
+
 output:
-  format: "text"
-  directory: "./osint_results"
-  timestamp: true
+  format: "json,markdown,html"   # Default report formats
+  directory: "./osint_results"   # Reports output directory
+  timestamp: true                # Add timestamp to filenames
+
+cache:
+  enabled: true                  # Enable output caching
+  ttl_seconds: 3600              # Cache time-to-live (1 hour)
+  backend: "memory"              # Cache backend: memory or disk
+
+dashboard:
+  host: "127.0.0.1"
+  port: 8080
+  debug: false
+
+ai_analysis:
+  default_model: "llama3-70b-8192"
+  default_type: "full"
+  temperature: 0.3
+  max_tokens: 4096
